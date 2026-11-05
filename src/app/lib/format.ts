@@ -17,8 +17,8 @@ export function formatDuration(ms: number): string {
 /**
  * Returns a compact, human readable relative time in Spanish.
  */
-export function formatRelativeTime(isoDate: string, now: number = Date.now()): string {
-  const timestamp = Date.parse(isoDate);
+export function formatRelativeTime(value: string | number, now: number = Date.now()): string {
+  const timestamp = typeof value === "number" ? value : Date.parse(value);
   if (Number.isNaN(timestamp)) {
     return "—";
   }
@@ -34,8 +34,8 @@ export function formatRelativeTime(isoDate: string, now: number = Date.now()): s
 /**
  * Formats a timestamp as a short local clock time.
  */
-export function formatClockTime(isoDate: string): string {
-  const timestamp = Date.parse(isoDate);
+export function formatClockTime(value: string | number): string {
+  const timestamp = typeof value === "number" ? value : Date.parse(value);
   if (Number.isNaN(timestamp)) {
     return "—";
   }

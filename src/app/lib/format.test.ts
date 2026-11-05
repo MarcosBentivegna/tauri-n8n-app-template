@@ -29,6 +29,10 @@ describe("formatRelativeTime", () => {
     expect(formatRelativeTime("2025-12-30T12:00:00.000Z", now)).toBe("hace 2 d");
   });
 
+  it("accepts epoch milliseconds", () => {
+    expect(formatRelativeTime(now - 30_000, now)).toBe("hace 30 s");
+  });
+
   it("handles invalid input", () => {
     expect(formatRelativeTime("not-a-date", now)).toBe("—");
   });
