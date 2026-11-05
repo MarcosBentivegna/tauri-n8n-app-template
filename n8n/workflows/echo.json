@@ -1,0 +1,54 @@
+{
+  "id": "studio-echo",
+  "name": "Echo webhook · n8n Studio",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "echo",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "0f0a6f9e-4bfe-4a6d-8f1a-4b3f8f6f9a01",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "webhookId": "7b0f4f9a-6c1e-4f0a-9a5b-2f8e4d3c1b01"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json.body ?? $json }}",
+        "options": {}
+      },
+      "id": "b6b7d0e2-8c1f-4b3a-9a7d-1c2e3f4a5b02",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [260, 0]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "9f1d2c3b-4a5e-4f6a-8b7c-1d2e3f4a5b03",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "tags": []
+}
