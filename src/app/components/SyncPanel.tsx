@@ -4,7 +4,7 @@ import { n8nClient } from "../lib/n8nClient";
 import { showToast } from "../lib/ui";
 
 export default function SyncPanel() {
-  const [out, setOut] = useState<any>(null);
+  const [out, setOut] = useState<unknown>(null);
   const [loading, setLoading] = useState(false);
 
   async function testEcho() {
@@ -13,9 +13,10 @@ export default function SyncPanel() {
       const res = await n8nClient.echo({ hello: "world" });
       setOut(res);
       showToast("Echo test successful!", "success");
-    } catch (e: any) {
-      setOut({ error: String(e) });
-      showToast("Echo test failed: " + String(e), "error");
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : String(error);
+      setOut({ error: message });
+      showToast(`Echo test failed: ${message}`, "error");
     } finally {
       setLoading(false);
     }
@@ -24,16 +25,17 @@ export default function SyncPanel() {
   async function syncContacts() {
     setLoading(true);
     try {
-      const res = await n8nClient.syncContacts({ 
-        altas: [], 
-        bajas: [], 
-        updates: [] 
+      const res = await n8nClient.syncContacts({
+        altas: [],
+        bajas: [],
+        updates: [],
       });
       setOut(res);
       showToast("Contacts sync successful!", "success");
-    } catch (e: any) {
-      setOut({ error: String(e) });
-      showToast("Contacts sync failed: " + String(e), "error");
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : String(error);
+      setOut({ error: message });
+      showToast(`Contacts sync failed: ${message}`, "error");
     } finally {
       setLoading(false);
     }

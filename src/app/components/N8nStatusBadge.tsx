@@ -12,7 +12,7 @@ export default function N8nStatusBadge() {
       try {
         await n8nClient.health();
         setN8nStatus("online");
-      } catch (error) {
+      } catch {
         setN8nStatus("offline");
       }
     };
