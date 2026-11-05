@@ -120,7 +120,7 @@ La app envía el payload a `{baseUrl}/webhook/{ruta}`. Podés escribir `echo` o 
 2. Elegí `n8n/workflows/echo.json` y `n8n/workflows/sync-contacts.json`.
 3. Activá cada workflow con el toggle **Active**.
 
-El script `npm run n8n:import` hace exactamente eso por CLI y activa todos los workflows.
+El script `npm run n8n:import` hace exactamente eso por CLI y activa los workflows de ejemplo.
 
 ## ⚙️ Configuración y seguridad
 
