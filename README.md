@@ -1,259 +1,307 @@
-# 🚀 Tauri n8n Starter
-
-> A modern desktop application template that integrates Tauri with n8n for local workflow automation
-
-[![Tauri](https://img.shields.io/badge/Tauri-2.0-FFC131?style=for-the-badge&logo=tauri&logoColor=black)](https://tauri.app/)
-[![React](https://img.shields.io/badge/React-18.2-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![n8n](https://img.shields.io/badge/n8n-Latest-FF6B5B?style=for-the-badge&logo=n8n&logoColor=white)](https://n8n.io/)
-[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+# n8n Studio
 
 <div align="center">
-  <img src="https://img.shields.io/badge/Status-Ready%20to%20Use-brightgreen?style=for-the-badge" alt="Status: Ready to Use"/>
-  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License: MIT"/>
+  <img src="./app-icon.svg" width="112" alt="n8n Studio" />
+
+  <p><strong>Panel de escritorio para tus automatizaciones locales de n8n.</strong></p>
+
+  <p>
+    <a href="https://tauri.app/"><img src="https://img.shields.io/badge/Tauri-2-FFC131?style=for-the-badge&logo=tauri&logoColor=black" alt="Tauri 2" /></a>
+    <a href="https://react.dev/"><img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React 19" /></a>
+    <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-5.9-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" /></a>
+    <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind-4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS 4" /></a>
+    <a href="https://www.rust-lang.org/"><img src="https://img.shields.io/badge/Rust-stable-000000?style=for-the-badge&logo=rust&logoColor=white" alt="Rust" /></a>
+    <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-22C55E?style=for-the-badge" alt="MIT" /></a>
+  </p>
 </div>
 
----
+![Resumen de n8n Studio](docs/screenshots/home.png)
 
-## ✨ Features
+**n8n Studio** es una plantilla de escritorio lista para usar como base de tus propias herramientas de automatización. Combina la velocidad de Tauri 2 con una interfaz moderna en React y un backend en Rust que mantiene las credenciales fuera del webview.
 
-<div align="center">
+## ✨ Qué incluye
 
-| 🎨 **Frontend**    | 🖥️ **Desktop**    | ⚡ **Automation** | 🔒 **Security**  |
-| ------------------ | ----------------- | ----------------- | ---------------- |
-| React + TypeScript | Tauri (Rust)      | n8n + Docker      | Basic Auth       |
-| Vite + TailwindCSS | Minimal footprint | Local workflows   | CSP Headers      |
-| Framer Motion      | Cross-platform    | Webhook triggers  | Environment vars |
+- **Tauri 2 real**: configuración v2, `capabilities`, `build.rs`, íconos y plugin de apertura de enlaces.
+- **Backend async en Rust**: `reqwest` + `rustls`, timeouts configurables y errores tipados que llegan a la UI como mensajes claros.
+- **Health check en vivo**: estado, latencia y versión de n8n con reintento automático cada 30 segundos.
+- **Runner de webhooks**: presets de `echo` y `sync-contacts`, editor de JSON con validación, status HTTP, duración y respuesta completa.
+- **Configuración persistente**: URL, usuario, contraseña y timeout guardados en el directorio de la app. La contraseña nunca vuelve al frontend.
+- **Historial local**: última actividad de webhooks y verificaciones, persistida en `localStorage`.
+- **UI pulida**: tema oscuro, navegación por teclado (`⌘/Ctrl + 1/2/3`), toasts, estados vacíos, skeletons y diseño responsive.
+- **Workflows de ejemplo**: importación automática con `npm run n8n:import`.
+- **Calidad**: TypeScript estricto, ESLint 10, Prettier, Vitest y tests de Rust.
+- **CI incluido**: GitHub Actions para frontend, lint, tests y `cargo clippy`.
 
-</div>
+## 📸 Capturas
 
-## 🎯 What You Get
+<p align="center">
+  <img src="docs/screenshots/workflows.png" alt="Runner de webhooks con respuesta HTTP" width="49%" />
+  <img src="docs/screenshots/settings.png" alt="Configuración de conexión y seguridad" width="49%" />
+</p>
 
-- **🚀 Modern UI**: Beautiful dark theme with smooth animations
-- **⚡ Real-time Status**: Live n8n connection monitoring
-- **🔧 Ready-to-use**: Pre-configured workflows and examples
-- **🛡️ Secure**: Built-in security best practices
-- **📱 Cross-platform**: Works on Windows, macOS, and Linux
+## 🧱 Stack
 
-## 🛠️ Tech Stack
+| Capa           | Tecnología                                       |
+| -------------- | ------------------------------------------------ |
+| Escritorio     | Tauri 2, Rust 2021, `tauri-plugin-opener`        |
+| Frontend       | React 19, TypeScript 5.9, Vite 8, Tailwind CSS 4 |
+| Estado         | Zustand 5                                        |
+| Animaciones    | Framer Motion 14                                 |
+| HTTP           | `reqwest` (rustls) + `tokio::sync::RwLock`       |
+| Tipografía     | Inter Variable                                   |
+| Tests          | Vitest + tests nativos de Rust                   |
+| Automatización | n8n en Docker Compose                            |
 
-```mermaid
-graph TB
-    A[Tauri App] --> B[React Frontend]
-    A --> C[Rust Backend]
-    C --> D[n8n Docker]
-    B --> E[TypeScript]
-    B --> F[TailwindCSS]
-    B --> G[Framer Motion]
-    C --> H[reqwest HTTP]
-    D --> I[Workflow Engine]
-```
+## 📋 Requisitos
 
-## 📋 Prerequisites
+- **Node.js 22.12+** (hay un `.nvmrc` con la versión recomendada).
+- **Rust estable 1.90+** ([rustup.rs](https://rustup.rs/)).
+- **Docker + Docker Compose** para levantar n8n.
+- **macOS**: Xcode Command Line Tools.
+- **Linux**: dependencias de Tauri (WebKitGTK 4.1, `librsvg`, `patchelf`).
 
-- **Node.js** 18+
-- **Rust** toolchain
-- **Docker** + Docker Compose
-
-## 🚀 Quick Start
-
-### 1. Clone & Install
-
-```bash
-# Clone the repository
-git clone <your-repo-url>
-cd tauri-n8n-starter
-
-# Install dependencies
-npm install
-```
-
-### 2. Environment Setup
+## 🚀 Inicio rápido
 
 ```bash
-# Copy environment variables
+# 1. Instalar dependencias
+npm ci
+
+# 2. (Opcional) Copiar los valores por defecto
 cp .env.example .env
+
+# 3. Levantar n8n e importar los workflows de ejemplo
+npm run n8n:import
+
+# 4. Abrir la app de escritorio
+npm run dev:app
 ```
 
-### 3. Run Development
+La primera vez que se abre n8n en <http://localhost:5678> te va a pedir crear la cuenta de propietario. Los workflows de ejemplo se importan y activan automáticamente con el script.
+
+> Si preferís arrancar n8n y la app en un solo paso: `npm run dev:full`. Para importar los workflows después, ejecutá `npm run n8n:import`.
+
+### Scripts disponibles
+
+| Comando              | Qué hace                                                        |
+| -------------------- | --------------------------------------------------------------- |
+| `npm run dev`        | Solo el frontend en el navegador (sin IPC de Tauri).            |
+| `npm run dev:app`    | Abre la app de escritorio con Tauri.                            |
+| `npm run dev:n8n`    | Levanta n8n con Docker Compose.                                 |
+| `npm run dev:full`   | Levanta n8n y después abre la app.                              |
+| `npm run n8n:import` | Levanta n8n, importa y activa los workflows de `n8n/workflows`. |
+| `npm run stop:n8n`   | Detiene el contenedor de n8n.                                   |
+| `npm run build`      | Typecheck + build del frontend.                                 |
+| `npm run build:app`  | Genera el bundle de escritorio (`tauri build`).                 |
+| `npm run check`      | Typecheck, ESLint, Vitest y Prettier.                           |
+| `npm run test`       | Ejecuta los tests del frontend.                                 |
+| `npm run lint`       | ESLint con cero warnings.                                       |
+| `npm run format`     | Formatea todo con Prettier.                                     |
+| `npm run typecheck`  | Verifica TypeScript (app y configs).                            |
+
+### Tests de Rust
 
 ```bash
-# Start n8n + Tauri app
+cargo test --manifest-path src-tauri/Cargo.toml
+cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings
+```
+
+## 🔌 Workflows de ejemplo
+
+| Workflow      | Endpoint                      | Respuesta                                    |
+| ------------- | ----------------------------- | -------------------------------------------- |
+| Echo          | `POST /webhook/echo`          | El mismo JSON recibido.                      |
+| Sync contacts | `POST /webhook/sync-contacts` | `{ ok, counts: { altas, bajas, updates } }`. |
+
+La app envía el payload a `{baseUrl}/webhook/{ruta}`. Podés escribir `echo` o la ruta completa `webhook/echo`; también se acepta `webhook-test/echo` para probar con el webhook en modo escucha de n8n.
+
+### Importación manual
+
+1. En n8n, abrí **Workflows → Import from File**.
+2. Elegí `n8n/workflows/echo.json` y `n8n/workflows/sync-contacts.json`.
+3. Activá cada workflow con el toggle **Active**.
+
+El script `npm run n8n:import` hace exactamente eso por CLI y activa todos los workflows.
+
+## ⚙️ Configuración y seguridad
+
+La URL, el usuario, la contraseña y el timeout se administran desde **Ajustes** y se guardan en:
+
+- **macOS**: `~/Library/Application Support/com.marcosbentivegna.n8nstudio/settings.json`
+- **Windows**: `%APPDATA%\com.marcosbentivegna.n8nstudio\settings.json`
+- **Linux**: `~/.config/com.marcosbentivegna.n8nstudio/settings.json`
+
+La ruta exacta también se muestra y se puede copiar desde la pantalla de Ajustes.
+
+- La **contraseña nunca se devuelve** al webview: `get_settings` solo informa `hasPassword`.
+- En macOS y Linux el archivo se escribe con permisos `0600` y de forma atómica.
+- Las llamadas HTTP se hacen desde Rust; el CSP del webview solo permite IPC local.
+- La app soporta **Basic Auth opcional** para instancias antiguas. n8n 1.x+ usa cuentas de usuario y los webhooks no requieren credenciales por defecto.
+- `.env` solo se usa como valor inicial o al restablecer la configuración:
+
+```dotenv
+N8N_BASE_URL=http://localhost:5678
+N8N_USER=
+N8N_PASSWORD=
+N8N_TIMEOUT_SECS=15
+```
+
+## 🏗️ Arquitectura
+
+```mermaid
+flowchart LR
+  UI["React 19 + Zustand"] -->|invoke| CMD["Comandos Tauri"]
+  CMD --> CFG[("settings.json")]
+  CMD --> HTTP["reqwest + rustls"]
+  HTTP --> N8N["n8n local"]
+  N8N -->|JSON| HTTP
+  HTTP --> CMD
+  CMD --> UI
+```
+
+### Comandos expuestos
+
+| Comando          | Descripción                                                         |
+| ---------------- | ------------------------------------------------------------------- |
+| `get_settings`   | Devuelve la configuración sin la contraseña.                        |
+| `save_settings`  | Valida, normaliza y persiste la configuración.                      |
+| `reset_settings` | Vuelve a los valores de `.env` / por defecto.                       |
+| `health_check`   | Consulta `/healthz`, mide latencia e intenta leer la versión.       |
+| `run_webhook`    | Envía un payload a `/webhook/*` y devuelve status, duración y body. |
+| `open_url`       | Abre un enlace http(s) con el navegador del sistema.                |
+| `app_info`       | Versión de la app, Tauri, OS, arquitectura y modo.                  |
+
+## 📁 Estructura
+
+```text
+.
+├── src/
+│   ├── app/
+│   │   ├── components/
+│   │   │   ├── ui/                  # Button, Card, EmptyState
+│   │   │   ├── ActivityFeed.tsx
+│   │   │   ├── AppShell.tsx
+│   │   │   ├── ErrorBoundary.tsx
+│   │   │   ├── StatusBadge.tsx
+│   │   │   └── ToastViewport.tsx
+│   │   ├── lib/                     # Cliente IPC, formato, validación, hooks
+│   │   ├── routes/                  # Home, Workflows, Settings
+│   │   ├── store/appStore.ts        # Estado global con Zustand
+│   │   └── types.ts
+│   ├── App.tsx
+│   ├── index.css                    # Tailwind 4 + tokens de diseño
+│   └── main.tsx
+├── src-tauri/
+│   ├── capabilities/default.json    # Permisos de la ventana principal
+│   ├── icons/
+│   ├── src/
+│   │   ├── commands.rs              # Comandos Tauri
+│   │   ├── config.rs                # Settings + persistencia
+│   │   ├── error.rs                 # Errores serializables
+│   │   ├── lib.rs
+│   │   ├── main.rs
+│   │   ├── n8n.rs                   # Cliente HTTP y health check
+│   │   └── state.rs
+│   ├── build.rs
+│   ├── Cargo.toml
+│   ├── tauri.conf.json
+│   └── tauri.dev.conf.json          # CSP relajado solo para desarrollo
+├── n8n/workflows/                   # Workflows de ejemplo importables
+├── scripts/import-workflows.sh
+├── docker-compose.yml
+└── .github/workflows/ci.yml
+```
+
+## 🛠️ Desarrollo
+
+```bash
+# Frontend con HMR, sin Tauri (modo navegador)
 npm run dev
+
+# App de escritorio completa
+npm run dev:app
+
+# Calidad antes de commitear
+npm run check
 ```
 
-This command will:
+El modo navegador es útil para iterar en la UI: muestra un aviso y deshabilita las funciones que dependen del IPC de Tauri. Para probar la integración real usá `npm run dev:app`.
 
-1. 🐳 Start n8n in Docker (http://localhost:5678)
-2. 🖥️ Launch the Tauri desktop application
+La CSP de desarrollo se define en `src-tauri/tauri.dev.conf.json` para permitir el HMR de Vite. La build de producción usa la CSP estricta de `tauri.conf.json`.
 
-### 🔑 Default Credentials
+### Cambiar el nombre o el identificador
 
-| Service | URL                   | Username | Password     |
-| ------- | --------------------- | -------- | ------------ |
-| **n8n** | http://localhost:5678 | `admin`  | `adminadmin` |
+Antes de publicar tu propia app, editá:
 
-## 📊 Available Scripts
+- `productName` e `identifier` en `src-tauri/tauri.conf.json`.
+- `name` y `version` en `package.json` y `src-tauri/Cargo.toml`.
+- El ícono: reemplazá `app-icon.svg` y ejecutá `npx tauri icon app-icon.svg`.
 
-| Command            | Description              |
-| ------------------ | ------------------------ |
-| `npm run dev`      | 🚀 Start n8n + Tauri app |
-| `npm run dev:n8n`  | 🐳 Start only n8n        |
-| `npm run stop:n8n` | ⏹️ Stop n8n              |
-| `npm run build`    | 📦 Build production app  |
-| `npm run lint`     | 🔍 Run ESLint            |
-| `npm run format`   | ✨ Format with Prettier  |
+> El identificador `com.marcosbentivegna.n8nstudio` es único para esta plantilla. Cambialo por uno propio para evitar conflictos de datos y de bundle.
 
-## 🔧 n8n Workflows
+## 📦 Build y distribución
 
-### 1. Webhook Echo
-
-Create a workflow in n8n with:
-
-```mermaid
-graph LR
-    A[Webhook] --> B[Function]
-    B --> C[Respond]
-
-    A -->|Path: /echo| A
-    B -->|Echo JSON| B
-    C -->|Return Response| C
+```bash
+npm run build:app
 ```
 
-**Configuration:**
+Los artefactos quedan en `src-tauri/target/release/bundle/` (`.app`/`.dmg` en macOS, `.msi`/`.exe` en Windows, `.deb`/`.AppImage` en Linux).
 
-- **Start Node**: Webhook
-  - Path: `/echo`
-  - Method: POST
-- **Function Node**:
-  ```javascript
-  return [{ json: { ok: true, received: $json } }];
-  ```
-- **Respond Node**: Body: `{{$json}}`
+- Para distribuir en macOS necesitás **codesign** y **notarización** con una cuenta de Apple Developer.
+- En Windows, firmá el instalador para evitar advertencias de SmartScreen.
+- El updater no está incluido por defecto; podés agregar `tauri-plugin-updater` cuando tengas un canal de releases.
 
-### 2. Sync Contacts
+## 🩺 Troubleshooting
 
-Create a workflow in n8n with:
+### La app dice “Sin conexión”
 
-```mermaid
-graph LR
-    A[Webhook] --> B[Function]
-    B --> C[Respond]
-
-    A -->|Path: /sync-contacts| A
-    B -->|Process Contacts| B
-    C -->|Return Summary| C
+```bash
+curl http://localhost:5678/healthz
+docker compose ps
+docker compose logs -f n8n
 ```
 
-**Configuration:**
+Verificá que el puerto `5678` esté libre y que la URL de Ajustes sea exactamente la de n8n.
 
-- **Start Node**: Webhook
-  - Path: `/sync-contacts`
-  - Method: POST
-- **Function Node**:
-  ```javascript
-  const { altas = [], bajas = [], updates = [] } = $json;
-  return [
-    {
-      json: {
-        ok: true,
-        counts: { altas: altas.length, bajas: bajas.length, updates: updates.length },
-      },
-    },
-  ];
-  ```
-- **Respond Node**: Body: `{{$json}}`
+### El webhook devuelve 404
 
-## 📁 Project Structure
+- El workflow tiene que estar **activo**.
+- La ruta del webhook debe coincidir (`echo`, `sync-contacts`).
+- En modo escucha de n8n usá `webhook-test/...`; en producción usá `webhook/...`.
 
-```
-tauri-n8n-starter/
-├─ 🎨 src/                          # Frontend React/TypeScript
-│  ├─ app/
-│  │  ├─ components/                # React Components
-│  │  │  ├─ AppShell.tsx           # Main layout
-│  │  │  ├─ N8nStatusBadge.tsx     # Status indicator
-│  │  │  └─ SyncPanel.tsx          # Workflow testing
-│  │  ├─ lib/                      # Utilities
-│  │  │  ├─ n8nClient.ts           # n8n API client
-│  │  │  └─ ui.ts                  # UI helpers
-│  │  ├─ store/                    # State management
-│  │  │  └─ appStore.ts            # Zustand store
-│  │  └─ routes/                   # Application pages
-│  │     ├─ Home.tsx               # Dashboard
-│  │     ├─ Workflows.tsx          # Workflow management
-│  │     └─ Settings.tsx           # Configuration
-│  ├─ App.tsx                      # Main app component
-│  ├─ main.tsx                     # Entry point
-│  └─ index.css                    # Global styles
-├─ ⚙️ src-tauri/                    # Backend Tauri (Rust)
-│  ├─ src/
-│  │  ├─ main.rs                   # Tauri commands
-│  │  └─ n8n_proxy.rs              # HTTP client for n8n
-│  ├─ tauri.conf.json              # Tauri configuration
-│  └─ Cargo.toml                   # Rust dependencies
-├─ 🐳 docker-compose.yml            # n8n configuration
-├─ 🔐 .env                         # Environment variables
-└─ 📖 README.md                    # This file
+### El puerto 1420 está ocupado
+
+Cerrá el proceso que lo esté usando:
+
+```bash
+lsof -ti tcp:1420 | xargs kill
 ```
 
-## 🛡️ Security Features
+### Quiero empezar de cero
 
-- **🔐 Credential Management**: Handled securely in Rust backend
-- **🛡️ CSP Headers**: Restrictive Content Security Policy
-- **🔒 Basic Auth**: n8n authentication enabled
-- **🌍 Environment Variables**: Secure configuration management
-- **📋 Allowlist**: Minimal Tauri permissions
+- En la app: **Ajustes → Restablecer configuración**.
+- n8n: `npm run stop:n8n && docker compose down -v` (borra también los datos y workflows).
 
-## 🎨 UI Preview
+### Error al compilar en Linux
 
-<div align="center">
+Instalá las dependencias de Tauri:
 
-### 🏠 Home Dashboard
+```bash
+sudo apt update
+sudo apt install libwebkit2gtk-4.1-dev build-essential curl wget file \
+  libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev patchelf
+```
 
-![Home Dashboard](https://via.placeholder.com/800x400/1f2937/ffffff?text=Home+Dashboard)
+## 🧩 Cómo extenderla
 
-### ⚡ Workflows Panel
+- Agregá comandos en `src-tauri/src/commands.rs` y registralos en `lib.rs`.
+- Sumá presets de webhooks en `src/app/routes/Workflows.tsx`.
+- Reemplazá los workflows de ejemplo por los tuyos en `n8n/workflows/`.
+- Para integraciones con la API pública de n8n, agregá el header `X-N8N-API-KEY` en el cliente Rust y un campo nuevo en Settings.
 
-![Workflows Panel](https://via.placeholder.com/800x400/1f2937/ffffff?text=Workflows+Panel)
+## 📄 Licencia
 
-### ⚙️ Settings Page
-
-![Settings Page](https://via.placeholder.com/800x400/1f2937/ffffff?text=Settings+Page)
-
-</div>
-
-## 📖 Documentation
-
-- **[📋 Usage Instructions (English)](INSTRUCTIONS.md)** - Complete setup and usage guide
-- **[📋 Instrucciones de Uso (Español)](INSTRUCCIONES.md)** - Guía completa de configuración y uso
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [Tauri](https://tauri.app/) - For the amazing desktop framework
-- [n8n](https://n8n.io/) - For the powerful workflow automation
-- [React](https://reactjs.org/) - For the frontend framework
-- [TailwindCSS](https://tailwindcss.com/) - For the utility-first CSS
+MIT © 2026 Marcos Bentivegna. Ver [LICENSE](./LICENSE).
 
 ---
 
-<div align="center">
-
-**Made with ❤️ for the automation community**
-
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/tauri-n8n-starter?style=social)](https://github.com/yourusername/tauri-n8n-starter)
-[![GitHub forks](https://img.shields.io/github/forks/yourusername/tauri-n8n-starter?style=social)](https://github.com/yourusername/tauri-n8n-starter)
-
-</div>
+Hecho con Tauri, Rust, React y n8n.
