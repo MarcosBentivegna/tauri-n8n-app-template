@@ -55,9 +55,7 @@ export default function AppShell({ children }: AppShellProps) {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div className="px-4 py-6 sm:px-0">
-          {children}
-        </div>
+        <div className="px-4 py-6 sm:px-0">{children}</div>
       </main>
 
       {/* Notifications */}
@@ -72,8 +70,8 @@ export default function AppShell({ children }: AppShellProps) {
               notification.type === "success"
                 ? "bg-green-600"
                 : notification.type === "error"
-                ? "bg-red-600"
-                : "bg-blue-600"
+                  ? "bg-red-600"
+                  : "bg-blue-600"
             }`}
           >
             <div className="flex justify-between items-start">

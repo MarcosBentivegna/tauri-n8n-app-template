@@ -19,11 +19,11 @@
 
 <div align="center">
 
-| 🎨 **Frontend** | 🖥️ **Desktop** | ⚡ **Automation** | 🔒 **Security** |
-|----------------|----------------|------------------|-----------------|
-| React + TypeScript | Tauri (Rust) | n8n + Docker | Basic Auth |
-| Vite + TailwindCSS | Minimal footprint | Local workflows | CSP Headers |
-| Framer Motion | Cross-platform | Webhook triggers | Environment vars |
+| 🎨 **Frontend**    | 🖥️ **Desktop**    | ⚡ **Automation** | 🔒 **Security**  |
+| ------------------ | ----------------- | ----------------- | ---------------- |
+| React + TypeScript | Tauri (Rust)      | n8n + Docker      | Basic Auth       |
+| Vite + TailwindCSS | Minimal footprint | Local workflows   | CSP Headers      |
+| Framer Motion      | Cross-platform    | Webhook triggers  | Environment vars |
 
 </div>
 
@@ -51,7 +51,7 @@ graph TB
 
 ## 📋 Prerequisites
 
-- **Node.js** 18+ 
+- **Node.js** 18+
 - **Rust** toolchain
 - **Docker** + Docker Compose
 
@@ -83,25 +83,26 @@ npm run dev
 ```
 
 This command will:
+
 1. 🐳 Start n8n in Docker (http://localhost:5678)
 2. 🖥️ Launch the Tauri desktop application
 
 ### 🔑 Default Credentials
 
-| Service | URL | Username | Password |
-|---------|-----|----------|----------|
-| **n8n** | http://localhost:5678 | `admin` | `adminadmin` |
+| Service | URL                   | Username | Password     |
+| ------- | --------------------- | -------- | ------------ |
+| **n8n** | http://localhost:5678 | `admin`  | `adminadmin` |
 
 ## 📊 Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | 🚀 Start n8n + Tauri app |
-| `npm run dev:n8n` | 🐳 Start only n8n |
-| `npm run stop:n8n` | ⏹️ Stop n8n |
-| `npm run build` | 📦 Build production app |
-| `npm run lint` | 🔍 Run ESLint |
-| `npm run format` | ✨ Format with Prettier |
+| Command            | Description              |
+| ------------------ | ------------------------ |
+| `npm run dev`      | 🚀 Start n8n + Tauri app |
+| `npm run dev:n8n`  | 🐳 Start only n8n        |
+| `npm run stop:n8n` | ⏹️ Stop n8n              |
+| `npm run build`    | 📦 Build production app  |
+| `npm run lint`     | 🔍 Run ESLint            |
+| `npm run format`   | ✨ Format with Prettier  |
 
 ## 🔧 n8n Workflows
 
@@ -113,13 +114,14 @@ Create a workflow in n8n with:
 graph LR
     A[Webhook] --> B[Function]
     B --> C[Respond]
-    
+
     A -->|Path: /echo| A
     B -->|Echo JSON| B
     C -->|Return Response| C
 ```
 
 **Configuration:**
+
 - **Start Node**: Webhook
   - Path: `/echo`
   - Method: POST
@@ -137,25 +139,28 @@ Create a workflow in n8n with:
 graph LR
     A[Webhook] --> B[Function]
     B --> C[Respond]
-    
+
     A -->|Path: /sync-contacts| A
     B -->|Process Contacts| B
     C -->|Return Summary| C
 ```
 
 **Configuration:**
+
 - **Start Node**: Webhook
   - Path: `/sync-contacts`
   - Method: POST
 - **Function Node**:
   ```javascript
   const { altas = [], bajas = [], updates = [] } = $json;
-  return [{
-    json: {
-      ok: true,
-      counts: { altas: altas.length, bajas: bajas.length, updates: updates.length }
-    }
-  }];
+  return [
+    {
+      json: {
+        ok: true,
+        counts: { altas: altas.length, bajas: bajas.length, updates: updates.length },
+      },
+    },
+  ];
   ```
 - **Respond Node**: Body: `{{$json}}`
 
@@ -205,12 +210,15 @@ tauri-n8n-starter/
 <div align="center">
 
 ### 🏠 Home Dashboard
+
 ![Home Dashboard](https://via.placeholder.com/800x400/1f2937/ffffff?text=Home+Dashboard)
 
 ### ⚡ Workflows Panel
+
 ![Workflows Panel](https://via.placeholder.com/800x400/1f2937/ffffff?text=Workflows+Panel)
 
 ### ⚙️ Settings Page
+
 ![Settings Page](https://via.placeholder.com/800x400/1f2937/ffffff?text=Settings+Page)
 
 </div>
@@ -249,4 +257,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [![GitHub forks](https://img.shields.io/github/forks/yourusername/tauri-n8n-starter?style=social)](https://github.com/yourusername/tauri-n8n-starter)
 
 </div>
-
