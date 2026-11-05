@@ -25,7 +25,7 @@ tokio = { version = "1", features = ["sync"] }
 thiserror = "2"
 url = "2"
 dotenvy = "0.15"
-base64 = "0.22"
+base64 = "0.23"
 
 [profile.release]
 codegen-units = 1
