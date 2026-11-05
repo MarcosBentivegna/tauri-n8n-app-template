@@ -1,47 +1,50 @@
 {
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "n8n Studio",
+  "version": "1.0.0",
+  "identifier": "com.marcosbentivegna.n8nstudio",
   "build": {
     "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
     "beforeBuildCommand": "npm run build",
-    "devPath": "http://localhost:1420",
-    "distDir": "../dist",
-    "withGlobalTauri": false
+    "frontendDist": "../dist"
   },
-  "package": {
-    "productName": "tauri-n8n-starter",
-    "version": "0.0.0"
-  },
-  "tauri": {
-    "allowlist": {
-      "all": false,
-      "shell": {
-        "all": false,
-        "open": true
-      }
-    },
-    "bundle": {
-      "active": true,
-      "targets": "all",
-      "identifier": "com.tauri.dev",
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ]
-    },
-    "security": {
-      "csp": "default-src \"self\"; img-src \"self\" data:; style-src \"self\" \"unsafe-inline\"; connect-src \"self\";"
-    },
+  "app": {
     "windows": [
       {
-        "fullscreen": false,
+        "label": "main",
+        "title": "n8n Studio",
+        "width": 1220,
+        "height": 800,
+        "minWidth": 980,
+        "minHeight": 640,
+        "center": true,
         "resizable": true,
-        "title": "Tauri n8n Starter",
-        "width": 1100,
-        "height": 720,
-        "decorations": true
+        "fullscreen": false,
+        "theme": "Dark",
+        "backgroundColor": "#07090f"
       }
-    ]
+    ],
+    "security": {
+      "csp": "default-src 'self'; connect-src 'self' ipc: http://ipc.localhost; img-src 'self' asset: http://asset.localhost data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "category": "DeveloperTool",
+    "copyright": "© 2026 Marcos Bentivegna",
+    "shortDescription": "Panel de escritorio para automatizaciones locales de n8n",
+    "longDescription": "n8n Studio conecta una interfaz de escritorio rápida y segura con tu instancia local de n8n. Probá webhooks, monitoreá la conexión y administrá credenciales sin salir de la app.",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "macOS": {
+      "minimumSystemVersion": "10.15"
+    }
   }
 }

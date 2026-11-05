@@ -1,27 +1,35 @@
 [package]
-name = "tauri-n8n-starter"
-version = "0.0.0"
-description = "A Tauri App"
-authors = ["you"]
-license = ""
-repository = ""
+name = "n8n-studio"
+version = "1.0.0"
+description = "Desktop control panel for local n8n workflows"
+authors = ["Marcos Bentivegna"]
+license = "MIT"
+repository = "https://github.com/MarcosBentivegna/tauri-n8n-app-template"
 edition = "2021"
+rust-version = "1.90"
 
-# See more keys and their definitions on https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "n8n_studio_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]
-tauri-build = { version = "2.0.0", features = [] }
+tauri-build = { version = "2", features = [] }
 
 [dependencies]
-tauri = { version = "2.0.0", features = ["shell-open"] }
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-reqwest = { version = "0.11", features = ["blocking", "json"] }
+tauri = { version = "2", features = [] }
+tauri-plugin-opener = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+tokio = { version = "1", features = ["sync"] }
+thiserror = "2"
+url = "2"
 dotenvy = "0.15"
-thiserror = "1.0"
-base64 = "0.21"
+base64 = "0.22"
 
-[features]
-# this feature is used for production builds or when `devPath` points to the filesystem
-# DO NOT REMOVE!!
-custom-protocol = ["tauri/custom-protocol"]
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true

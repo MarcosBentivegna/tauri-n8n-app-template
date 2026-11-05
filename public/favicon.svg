@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#151d2c" />
+      <stop offset="1" stop-color="#07090f" />
+    </linearGradient>
+    <linearGradient id="flow" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#fb7185" />
+      <stop offset="1" stop-color="#fbbf24" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1024" height="1024" rx="224" fill="url(#bg)" />
+  <g fill="none" stroke="url(#flow)" stroke-width="34" stroke-linecap="round">
+    <path d="M385 512C470 512 480 320 500 320" opacity=".95" />
+    <path d="M385 512C470 512 480 704 500 704" opacity=".95" />
+    <path d="M680 320C730 320 720 512 743 512" opacity=".7" />
+    <path d="M680 704C730 704 720 512 743 512" opacity=".7" />
+  </g>
+
+  <circle cx="295" cy="512" r="94" fill="#0b0f17" stroke="#fb7185" stroke-width="36" />
+  <circle cx="295" cy="512" r="28" fill="#fb7185" />
+  <circle cx="590" cy="320" r="94" fill="#0b0f17" stroke="#fbbf24" stroke-width="36" />
+  <circle cx="590" cy="320" r="28" fill="#fbbf24" />
+  <circle cx="590" cy="704" r="94" fill="#0b0f17" stroke="#f472b6" stroke-width="36" />
+  <circle cx="590" cy="704" r="28" fill="#f472b6" />
+  <circle cx="785" cy="512" r="44" fill="#f59e0b" />
+</svg>
