@@ -1,0 +1,75 @@
+{
+  "id": "studio-sync-contacts",
+  "name": "Sync contacts · n8n Studio",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "sync-contacts",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "5a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c04",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "webhookId": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c05"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $json.body ?? $json;\nconst { altas = [], bajas = [], updates = [] } = body;\n\nreturn [{\n  json: {\n    ok: true,\n    counts: {\n      altas: altas.length,\n      bajas: bajas.length,\n      updates: updates.length\n    },\n    processedAt: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "6b2c3d4e-5f6a-4b7c-9d8e-0f1a2b3c4d06",
+      "name": "Summarize contacts",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [260, 0]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {}
+      },
+      "id": "7c3d4e5f-6a7b-4c8d-9e0f-1a2b3c4d5e07",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [520, 0]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Summarize contacts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarize contacts": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2b3c4d5e-6f7a-4b8c-9d0e-1f2a3b4c5d08",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "tags": []
+}
