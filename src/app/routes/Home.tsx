@@ -12,7 +12,7 @@ export default function Home() {
       <p className="text-xl text-gray-300 mb-8">
         Una aplicación de escritorio que integra Tauri con n8n para automatizaciones locales.
       </p>
-      
+
       <div className="bg-gray-800 rounded-lg p-6 max-w-md mx-auto">
         <h2 className="text-lg font-semibold mb-4">Estado del Sistema</h2>
         <div className="flex items-center justify-center space-x-2">
@@ -22,10 +22,7 @@ export default function Home() {
       </div>
 
       <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          className="bg-gray-800 p-6 rounded-lg"
-        >
+        <motion.div whileHover={{ scale: 1.05 }} className="bg-gray-800 p-6 rounded-lg">
           <div className="text-3xl mb-2">⚡</div>
           <h3 className="text-lg font-semibold mb-2">Workflows</h3>
           <p className="text-gray-400">
@@ -33,10 +30,7 @@ export default function Home() {
           </p>
         </motion.div>
 
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          className="bg-gray-800 p-6 rounded-lg"
-        >
+        <motion.div whileHover={{ scale: 1.05 }} className="bg-gray-800 p-6 rounded-lg">
           <div className="text-3xl mb-2">🔗</div>
           <h3 className="text-lg font-semibold mb-2">Integración</h3>
           <p className="text-gray-400">
@@ -44,10 +38,7 @@ export default function Home() {
           </p>
         </motion.div>
 
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          className="bg-gray-800 p-6 rounded-lg"
-        >
+        <motion.div whileHover={{ scale: 1.05 }} className="bg-gray-800 p-6 rounded-lg">
           <div className="text-3xl mb-2">⚙️</div>
           <h3 className="text-lg font-semibold mb-2">Configuración</h3>
           <p className="text-gray-400">

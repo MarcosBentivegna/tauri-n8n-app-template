@@ -19,14 +19,15 @@ npm run dev
 ## 🐳 2. n8n Configuration
 
 The `npm run dev` command automatically:
+
 - 🐳 Starts n8n in Docker (port 5678)
 - 🖥️ Opens the Tauri application
 
 ### 🔑 Default Credentials:
 
-| Service | URL | Username | Password |
-|---------|-----|----------|----------|
-| **n8n** | http://localhost:5678 | `admin` | `adminadmin` |
+| Service | URL                   | Username | Password     |
+| ------- | --------------------- | -------- | ------------ |
+| **n8n** | http://localhost:5678 | `admin`  | `adminadmin` |
 
 ## ⚡ 3. Create n8n Workflows
 
@@ -54,12 +55,14 @@ The `npm run dev` command automatically:
 3. ⚙️ Add a "Function" node:
    ```javascript
    const { altas = [], bajas = [], updates = [] } = $json;
-   return [{
-     json: {
-       ok: true,
-       counts: { altas: altas.length, bajas: bajas.length, updates: updates.length }
-     }
-   }];
+   return [
+     {
+       json: {
+         ok: true,
+         counts: { altas: altas.length, bajas: bajas.length, updates: updates.length },
+       },
+     },
+   ];
    ```
 4. 📤 Add a "Respond to Webhook" node:
    - **Body**: `{{$json}}`
@@ -73,14 +76,14 @@ The `npm run dev` command automatically:
 
 ## 📊 5. Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | 🚀 Start n8n + Tauri app |
-| `npm run dev:n8n` | 🐳 Start only n8n |
-| `npm run stop:n8n` | ⏹️ Stop n8n |
-| `npm run build` | 📦 Build the application |
-| `npm run lint` | 🔍 Run ESLint |
-| `npm run format` | ✨ Format with Prettier |
+| Command            | Description              |
+| ------------------ | ------------------------ |
+| `npm run dev`      | 🚀 Start n8n + Tauri app |
+| `npm run dev:n8n`  | 🐳 Start only n8n        |
+| `npm run stop:n8n` | ⏹️ Stop n8n              |
+| `npm run build`    | 📦 Build the application |
+| `npm run lint`     | 🔍 Run ESLint            |
+| `npm run format`   | ✨ Format with Prettier  |
 
 ## 📁 6. Project Structure
 
@@ -123,6 +126,7 @@ graph TD
 ## 🔧 9. Troubleshooting
 
 ### n8n won't start
+
 ```bash
 # Check Docker
 docker --version
@@ -134,11 +138,13 @@ npm run dev:n8n
 ```
 
 ### Connection error
+
 - Verify port 5678 is free
 - Check credentials in `.env`
 - Review Docker logs: `docker logs n8n_local`
 
 ### Build issues
+
 ```bash
 # Clean cache
 npm run clean
@@ -159,12 +165,14 @@ cargo build
 ## 🚀 11. Next Steps
 
 ### Customize the Application
+
 1. **Modify UI**: Edit components in `src/app/components/`
 2. **Add Features**: Create new Tauri commands in `src-tauri/src/main.rs`
 3. **Extend Workflows**: Add more n8n workflows for your use case
 4. **Styling**: Customize with TailwindCSS in `src/index.css`
 
 ### Production Deployment
+
 1. **Build**: `npm run build`
 2. **Test**: Verify all workflows work correctly
 3. **Deploy**: Distribute the built application

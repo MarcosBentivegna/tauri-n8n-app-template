@@ -22,10 +22,7 @@ export const useAppStore = create<AppState>((set) => ({
   setN8nStatus: (status) => set({ n8nStatus: status }),
   addNotification: (notification) =>
     set((state) => ({
-      notifications: [
-        ...state.notifications,
-        { ...notification, id: Date.now().toString() },
-      ],
+      notifications: [...state.notifications, { ...notification, id: Date.now().toString() }],
     })),
   removeNotification: (id) =>
     set((state) => ({
