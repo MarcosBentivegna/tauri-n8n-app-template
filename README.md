@@ -250,6 +250,17 @@ Los artefactos quedan en `src-tauri/target/release/bundle/` (`.app`/`.dmg` en ma
 - En Windows, firmá el instalador para evitar advertencias de SmartScreen.
 - El updater no está incluido por defecto; podés agregar `tauri-plugin-updater` cuando tengas un canal de releases.
 
+### Publicar una versión
+
+El repo incluye `.github/workflows/release.yml`, que compila macOS (Intel y Apple Silicon), Linux y Windows al pushear un tag, y crea un **draft release** con los artefactos:
+
+```bash
+git tag -a v1.0.0 -m "n8n Studio v1.0.0"
+git push origin v1.0.0
+```
+
+Revisá el draft en **GitHub → Releases**, verificá los binarios y publicalo. Los artefactos se generan sin firma de código; para producción configurá los secrets de firma y notarización.
+
 ## 🩺 Troubleshooting
 
 ### La app dice “Sin conexión”
